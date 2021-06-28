@@ -116,5 +116,4 @@ namespace RPG.Control {
         }
 
     } // end of AIController
-
 }
