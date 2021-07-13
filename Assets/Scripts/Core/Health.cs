@@ -22,7 +22,6 @@ namespace RPG.Core {
 
             if (IsDead()) return; 
 
-    
             isDead = true;
             GetComponent<Animator>().SetTrigger("die");
             GetComponent<ActionScheduler>().CancelCurrentAction();
