@@ -1,4 +1,5 @@
-﻿using RPG.Core;
+﻿using System;
+using RPG.Core;
 using UnityEngine;
 
 namespace RPG.Combat {
@@ -13,18 +14,43 @@ namespace RPG.Combat {
         [SerializeField] bool isRightHanded = true;
         [SerializeField] Projectile projectile = null;
 
-        public void Spawn(Transform rightHand, Transform leftHand, Animator animator) {
-            
-            if (equippedPrefab != null)
-            {
-                Transform handTransform = GetTransform(rightHand, leftHand);
+        const string WEAPON_NAME = "Weapon";
 
-                Instantiate(equippedPrefab, handTransform);
+        public void Spawn(Transform rightHand, Transform leftHand, Animator animator) {
+
+            DestroyOldWeapon(rightHand, leftHand);
+            
+            if (equippedPrefab != null) {
+                Transform handTransform = GetTransform(rightHand, leftHand);
+                GameObject weapon = Instantiate(equippedPrefab, handTransform);
+                weapon.name = WEAPON_NAME;
             }
+
+            var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
 
             if (animatorOverride != null) {
+                
                 animator.runtimeAnimatorController = animatorOverride; 
+                
+            } else if (overrideController != null) {
+            
+                animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
             }
+        }
+
+        private void DestroyOldWeapon(Transform rightHand, Transform leftHand) {
+            
+            Transform oldWeapon = rightHand.Find(WEAPON_NAME);
+            
+            if (oldWeapon == null) {
+                oldWeapon = leftHand.Find(WEAPON_NAME);
+            }
+
+            if (oldWeapon == null) return;
+
+            // Rename oldWeapon before naming new weapon
+            oldWeapon.name = "DESTROYING";
+            Destroy(oldWeapon.gameObject);
         }
 
         private Transform GetTransform(Transform rightHand, Transform leftHand) {

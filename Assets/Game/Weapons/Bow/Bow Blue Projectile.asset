@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e043f991854f23f4fbfcf80f36ac27d2, type: 3}
-  m_Name: Bow
+  m_Name: Bow Blue Projectile
   m_EditorClassIdentifier: 
   animatorOverride: {fileID: 22100000, guid: 3e1fdc622d5c54b4e993851701cb51bd, type: 2}
   equippedPrefab: {fileID: 5025295357136000151, guid: 1cec75588cc594448a418e65b12e1861,
     type: 3}
   weaponDamage: 10
-  weaponRange: 10
+  weaponRange: 20
   isRightHanded: 0
-  projectile: {fileID: 5583518271854397059, guid: 7346a370a0851994ca893df2c278be3d,
+  projectile: {fileID: 7232619752276179739, guid: 196fba9b7aba0304da43ea4d3b0e6978,
     type: 3}
