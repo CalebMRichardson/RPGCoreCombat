@@ -1,10 +1,7 @@
-namespace RPG.Cinematics {
-    
-    public interface IMoment {
-
+namespace RPG.Cinematics{
+    interface IMoment {
         void StartSequence();
         void StopSequence();
-
     }
 
 }

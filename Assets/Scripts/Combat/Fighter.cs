@@ -2,6 +2,7 @@ using UnityEngine;
 using RPG.Movement;
 using RPG.Core;
 using RPG.Saving;
+using RPG.Resources;
 
 namespace RPG.Combat {
     
@@ -63,10 +64,10 @@ namespace RPG.Combat {
 
             if (currentWeapon.HasProjectile()) {
                 
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject);
             } else {
 
-                target.TakeDamage(currentWeapon.GetDamage());
+                target.TakeDamage(gameObject, currentWeapon.GetDamage());
             }
         }
         
@@ -114,6 +115,10 @@ namespace RPG.Combat {
             GetComponent<Animator>().SetTrigger("stopAttack");
         }
 
+        public Health GetTarget() {
+            return target;
+        }
+
         public object CaptureState() {
             return currentWeapon.name;
         }
@@ -122,7 +127,7 @@ namespace RPG.Combat {
             
             string weaponName = (string)state; 
 
-            Weapon weapon = Resources.Load<Weapon>(weaponName); 
+            Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName); 
 
             EquipWeapon(weapon);
         }
