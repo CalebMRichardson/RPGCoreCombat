@@ -605,7 +605,7 @@ PrefabInstance:
         type: 3}
       propertyPath: defaultWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: e5afef73cb272b74ea1ee0a2601b3ed1,
+      objectReference: {fileID: 11400000, guid: 98796d5f6d1683244a56feba2e1fc597,
         type: 2}
     - target: {fileID: 1649170920936219438, guid: e4ed9feada2aeb346835dca8ee8c56b1,
         type: 3}
@@ -731,6 +731,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5200192620811013742, guid: dfb7306e928fb9744955a7b6cd0238b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7089082178948767387, guid: dfb7306e928fb9744955a7b6cd0238b7,
         type: 3}
       propertyPath: uniqueIdentifier
@@ -739,7 +744,7 @@ PrefabInstance:
     - target: {fileID: 8385186851999519590, guid: dfb7306e928fb9744955a7b6cd0238b7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -244.41447
+      value: -242.1
       objectReference: {fileID: 0}
     - target: {fileID: 8385186851999519590, guid: dfb7306e928fb9744955a7b6cd0238b7,
         type: 3}
@@ -749,7 +754,7 @@ PrefabInstance:
     - target: {fileID: 8385186851999519590, guid: dfb7306e928fb9744955a7b6cd0238b7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -138.08952
+      value: -137
       objectReference: {fileID: 0}
     - target: {fileID: 8385186851999519590, guid: dfb7306e928fb9744955a7b6cd0238b7,
         type: 3}

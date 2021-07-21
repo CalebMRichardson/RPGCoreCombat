@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RPG.Resources {
+namespace RPG.Stats {
     
     public class ExperienceDisplay : MonoBehaviour {
         
@@ -18,7 +18,5 @@ namespace RPG.Resources {
         private void Update() {
             experienceText.text = String.Format("{0:0}", experience.GetPoints());
         }
-
-
     }
 }

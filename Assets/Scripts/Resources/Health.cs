@@ -2,19 +2,27 @@ using UnityEngine;
 using RPG.Saving;
 using RPG.Stats;
 using RPG.Core;
-using System;
+
 
 namespace RPG.Resources {
 
     public class Health : MonoBehaviour, ISaveable {
 
+        [SerializeField] float regenerationPercentage = 70;
+
         private bool isDead = false;
-        [SerializeField] private float healthPoints = 100f;
+        float healthPoints = -1f;
         BaseStats baseStats = null;
 
         private void Start() {
+            
             baseStats = GetComponent<BaseStats>(); 
-            healthPoints = baseStats.GetStat(Stat.Health);
+
+            baseStats.onLevelUp += RegenerateHealth;
+            
+            if (healthPoints < 0) {
+                healthPoints = baseStats.GetStat(Stat.Health);
+            }
         }
         
         public bool IsDead() {
@@ -23,11 +31,21 @@ namespace RPG.Resources {
 
         public void TakeDamage(GameObject instigator, float damage) {
 
+            print(gameObject.name + " took damage: " + damage);
+
             healthPoints = Mathf.Max(healthPoints - damage, 0); 
             if (healthPoints <= 0) {
                 Die();
                 AwardExperience(instigator);
             }
+        }
+
+        public float GetHealthPoints() {
+            return healthPoints;
+        }
+
+        public float GetMaxHealthPoints() {
+            return baseStats.GetStat(Stat.Health);
         }
 
         private void Die() {
@@ -45,11 +63,15 @@ namespace RPG.Resources {
 
         private void AwardExperience(GameObject instigator) {
 
-           
             Experience experience = instigator.GetComponent<Experience>();
 
             if (experience == null) return;
-            experience.GainExperience(GetComponent<BaseStats>().GetStat(Stat.ExperienceReward));
+            experience.GainExperience(baseStats.GetStat(Stat.ExperienceReward));
+        }
+
+        private void RegenerateHealth() {
+            float regenHealthPoints = baseStats.GetStat(Stat.Health) * regenerationPercentage / 100;
+            healthPoints = Mathf.Max(healthPoints, regenHealthPoints);
         }
 
         // Called by ISaveable

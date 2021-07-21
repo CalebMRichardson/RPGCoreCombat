@@ -4,7 +4,7 @@ using System.Collections;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System;
 
 namespace RPG.Saving {
     
@@ -44,24 +44,11 @@ namespace RPG.Saving {
                 formatter.Serialize(stream, state);
             }
         }
-
-        private void CaptureState(Dictionary<string, object> state) {
-
-            foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>()) {
-                state[saveable.GetUniqueIdentifier()] = saveable.CaptureState();
-            }
-
-            state["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex; 
-        }
-
-        private void RestoreState(Dictionary<string, object> state) {
-
-            foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>()) {
-                string id = saveable.GetUniqueIdentifier();
-                if (state.ContainsKey(id)) {
-                    saveable.RestoreState(state[id]);
-                }
-            }
+        
+        public void Delete(string saveFile) {
+            string path = GetPathFromSaveFile(saveFile);
+            File.Delete(path);
+            print("Deleting Save file " + path);
         }
 
         public void Load(string saveFile) {
@@ -87,5 +74,26 @@ namespace RPG.Saving {
         private string GetPathFromSaveFile(string saveFile) {
             return Path.Combine(Application.persistentDataPath, saveFile + ".sav");
         }
+
+
+        private void CaptureState(Dictionary<string, object> state) {
+
+            foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>()) {
+                state[saveable.GetUniqueIdentifier()] = saveable.CaptureState();
+            }
+
+            state["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex; 
+        }        
+        
+        private void RestoreState(Dictionary<string, object> state) {
+
+            foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>()) {
+                string id = saveable.GetUniqueIdentifier();
+                if (state.ContainsKey(id)) {
+                    saveable.RestoreState(state[id]);
+                }
+            }
+        }
+
     }
 }
