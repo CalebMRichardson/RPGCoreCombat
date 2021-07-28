@@ -15,8 +15,8 @@ MonoBehaviour:
   animatorOverride: {fileID: 22100000, guid: a481106edb0385942a0708c9843b64ae, type: 2}
   equippedPrefab: {fileID: 6614541849465541892, guid: 539c5db78848c4949a8d6a4351ada893,
     type: 3}
-  weaponDamage: 10
-  percentageBonus: 10
+  weaponDamage: 2
+  percentageBonus: 20
   weaponRange: 2
   isRightHanded: 1
   projectile: {fileID: 0}
