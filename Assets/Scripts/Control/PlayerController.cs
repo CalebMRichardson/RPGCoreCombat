@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using RPG.Movement;
 using RPG.Combat;
 using RPG.Resources;
+using System;
 
 namespace RPG.Control {
 public class PlayerController : MonoBehaviour {
@@ -10,13 +11,6 @@ public class PlayerController : MonoBehaviour {
         private const int LEFT_MOUSE_BUTTON = 0;
         private Mover mover; 
         private Health health;
-
-        enum CursorType {
-            None, 
-            Movement,
-            Combat,
-            UI
-        }
 
         [System.Serializable]
         struct CursorMapping {
@@ -52,7 +46,7 @@ public class PlayerController : MonoBehaviour {
 
         private bool InteractWithComponent() {
             
-            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            RaycastHit[] hits = RaycastAllSorted();
         
             foreach(RaycastHit hit in hits) {
                 
@@ -62,12 +56,25 @@ public class PlayerController : MonoBehaviour {
                     
                     if (raycastable.HandleRaycast(this)) {
                     
-                        SetCursor(CursorType.Combat);
+                        SetCursor(raycastable.GetCursorType());
                         return true;
                     }
                 }
             }
             return false;
+        }
+
+        private RaycastHit[] RaycastAllSorted() {
+
+            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            float[] distances = new float[hits.Length];
+
+            for (int i = 0; i < hits.Length; i++) {
+                distances[i] = hits[i].distance;
+            }
+
+            Array.Sort(distances, hits);
+            return hits;
         }
 
         private bool InteractWithUI() {
@@ -103,12 +110,12 @@ public class PlayerController : MonoBehaviour {
 
         private CursorMapping GetCursorMapping(CursorType type) {
            
-           foreach (CursorMapping mapping in cursorMappings) {
-               if (mapping.type == type) {
-                 return mapping;  
-               }
-           }
-
+            foreach (CursorMapping mapping in cursorMappings) {
+                if (mapping.type == type) {
+                    return mapping;  
+                }
+            }
+            print("Default");
            return cursorMappings[0];
         }
 
