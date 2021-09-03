@@ -647,21 +647,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -9.200012
       objectReference: {fileID: 0}
-    - target: {fileID: 6199492696697026263, guid: e4ed9feada2aeb346835dca8ee8c56b1,
-        type: 3}
-      propertyPath: cursorMappings.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6199492696697026263, guid: e4ed9feada2aeb346835dca8ee8c56b1,
-        type: 3}
-      propertyPath: cursorMappings.Array.data[3].type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6199492696697026263, guid: e4ed9feada2aeb346835dca8ee8c56b1,
-        type: 3}
-      propertyPath: cursorMappings.Array.data[3].texture
-      value: 
-      objectReference: {fileID: 2800000, guid: fe2443101ded6f544b32f8dc8690c367, type: 3}
     - target: {fileID: 8619597844130195266, guid: e4ed9feada2aeb346835dca8ee8c56b1,
         type: 3}
       propertyPath: m_LocalPosition.x
