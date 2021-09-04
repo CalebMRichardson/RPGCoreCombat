@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 7115874258481930644}
   - component: {fileID: 7828545569559905415}
   - component: {fileID: 5565576841269385241}
+  - component: {fileID: 6362269554482141961}
   m_Layer: 5
   m_Name: Damage Text
   m_TagString: Untagged
@@ -219,6 +220,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &6362269554482141961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3613496593296882983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc3bf8da701ca84dafd6417092bea31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetToDestroy: {fileID: 7058839110279917403}
 --- !u!1 &7058839110279917403
 GameObject:
   m_ObjectHideFlags: 0
