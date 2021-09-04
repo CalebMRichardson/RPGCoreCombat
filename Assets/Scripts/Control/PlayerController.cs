@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
 using RPG.Movement;
-using RPG.Resources;
+using RPG.Attributes;
 using System;
 
 namespace RPG.Control {
-public class PlayerController : MonoBehaviour {
+
+    public class PlayerController : MonoBehaviour {
     
         private const int LEFT_MOUSE_BUTTON = 0;
         private Mover mover; 

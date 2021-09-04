@@ -5,7 +5,7 @@ using RPG.Stats;
 using RPG.Core;
 using GameDevTV.Utils;
 
-namespace RPG.Resources {
+namespace RPG.Attributes {
 
     public class Health : MonoBehaviour, ISaveable {
 
@@ -67,6 +67,14 @@ namespace RPG.Resources {
         public float GetMaxHealthPoints() {
             return baseStats.GetStat(Stat.Health);
         }
+        
+        public float GetPercentage() {
+            return 100 * (healthPoints.value / baseStats.GetStat(Stat.Health));
+        }
+
+        public float GetFraction() {
+            return (healthPoints.value / baseStats.GetStat(Stat.Health));
+        }
 
         private void Die() {
 
@@ -76,11 +84,7 @@ namespace RPG.Resources {
             GetComponent<Animator>().SetTrigger("die");
             GetComponent<ActionScheduler>().CancelCurrentAction();
         }
-        
-        public float GetPercentage() {
-            return 100 * (healthPoints.value / baseStats.GetStat(Stat.Health));
-        }
-
+    
         private void AwardExperience(GameObject instigator) {
 
             Experience experience = instigator.GetComponent<Experience>();
