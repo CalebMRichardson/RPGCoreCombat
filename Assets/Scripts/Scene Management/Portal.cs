@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using RPG.Control;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -38,12 +39,19 @@ namespace RPG.SceneManagement {
 
             Fader fader = FindObjectOfType<Fader>();
             SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
-           
+            
+            PlayerController playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            // Remove control
+            playerController.enabled = false;
+
             yield return fader.FadeOut(fadeOutTime);
             
             savingWrapper.Save();
 
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
+            // Remove control
+            PlayerController newPlayerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            newPlayerController.enabled = false;
 
             savingWrapper.Load();
             
@@ -55,7 +63,10 @@ namespace RPG.SceneManagement {
 
             yield return new WaitForSeconds(fadeWaitTime);
             
-            yield return fader.FadeIn(fadeInTime);
+            fader.FadeIn(fadeInTime);
+
+            // Restore control
+            newPlayerController.enabled = true;
 
             Destroy(gameObject);
         }
@@ -68,7 +79,6 @@ namespace RPG.SceneManagement {
             player.transform.position = otherPortal.spawnPoint.position;
             player.transform.rotation = otherPortal.spawnPoint.rotation;
             player.GetComponent<NavMeshAgent>().enabled = true;
-        
         }
 
         private Portal GetOtherPortal() {
