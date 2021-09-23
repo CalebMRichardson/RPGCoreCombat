@@ -4,6 +4,7 @@ using RPG.Saving;
 using RPG.Stats;
 using RPG.Core;
 using GameDevTV.Utils;
+using System;
 
 namespace RPG.Attributes {
 
@@ -29,6 +30,8 @@ namespace RPG.Attributes {
         private float GetInitialHealth() {
             return GetComponent<BaseStats>().GetStat(Stat.Health);
         }
+
+
 
         private void OnEnable() {
             baseStats.onLevelUp += RegenerateHealth;
@@ -58,6 +61,12 @@ namespace RPG.Attributes {
             } else {
                 takeDamage.Invoke(damage);
             }
+        }
+
+        public void Heal(float healthToRestore) {
+            
+            healthPoints.value = Mathf.Min(healthPoints.value + healthToRestore, GetMaxHealthPoints());
+
         }
 
         public float GetHealthPoints() {
