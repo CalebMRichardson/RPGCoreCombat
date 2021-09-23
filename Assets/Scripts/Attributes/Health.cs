@@ -122,6 +122,5 @@ namespace RPG.Attributes {
                 Die();
             }
         }
-
     } // end of health.cs
 }
